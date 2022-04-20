@@ -19,6 +19,7 @@ jira = JIRA(options=jiraOptions, basic_auth=auths)
 m = []
 j=[]
 # Search all issues mentioned against a project name and specific issue types.
+print("These are the issue with details:")
 for singleIssue in jira.search_issues(jql_str=f'project = NIMBUS AND issuetype in {issueTypes}  AND status = "In Progress"AND team = {teamName} AND Sprint in openSprints()', fields=['key','summary', 'assignee', 'timetracking']):
     if singleIssue.fields.assignee != None or singleIssue.fields.timetracking.remainingEstimate != None:
         flag += 1
@@ -34,10 +35,11 @@ if flag <=0:
     print("----------------------------------------")
     print(" You are good to go for- ",d2)
     print("----------------------------------------")
+    time.sleep(8)
 else:
-    print("Your report is now generated.")
+    print("\nYour report is now generated.")
     #for freezing the console for 10 secs
-    time.sleep(5)
+    time.sleep(4)
     row = 0
     col = 0
     for i in range(0, len(m)):
